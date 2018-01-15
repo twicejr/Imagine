@@ -52,7 +52,7 @@ final class Imagine extends AbstractImagine
 
         try {
             $imagick = new \Imagick($path);
-            $image = new Image($imagick, $this->createPalette($imagick), $this->getMetadataReader()->readFile($path));
+            $image = new Image($imagick, $this->createPalette($imagick), new MetadataBag());
         } catch (\Exception $e) {
             throw new RuntimeException(sprintf('Unable to open image %s', $path), $e->getCode(), $e);
         }
@@ -109,7 +109,7 @@ final class Imagine extends AbstractImagine
             $imagick->readImageBlob($string);
             $imagick->setImageMatte(true);
 
-            return new Image($imagick, $this->createPalette($imagick), $this->getMetadataReader()->readData($string));
+            return new Image($imagick, $this->createPalette($imagick), new MetadataBag());
         } catch (\ImagickException $e) {
             throw new RuntimeException('Could not load image from string', $e->getCode(), $e);
         }
@@ -133,7 +133,7 @@ final class Imagine extends AbstractImagine
             throw new RuntimeException('Could not read image from resource', $e->getCode(), $e);
         }
 
-        return new Image($imagick, $this->createPalette($imagick), $this->getMetadataReader()->readData($content, $resource));
+        return new Image($imagick, $this->createPalette($imagick), new MetadataBag());
     }
 
     /**
