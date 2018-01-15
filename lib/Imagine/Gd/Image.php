@@ -83,6 +83,17 @@ final class Image extends AbstractImage
     }
 
     /**
+     * Trim the image with optional fuzziness
+     * @param type $fuzziness
+     * @return $this
+     * @throws RuntimeException
+     */
+    final public function trim($fuzziness = 0)
+    {
+        throw new RuntimeException('Trim operation not implemented yet!');
+    }
+    
+    /**
      * {@inheritdoc}
      *
      * @return ImageInterface

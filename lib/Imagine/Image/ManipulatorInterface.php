@@ -25,6 +25,12 @@ interface ManipulatorInterface
     const THUMBNAIL_INSET    = 'inset';
     const THUMBNAIL_OUTBOUND = 'outbound';
 
+    
+    /**
+     * Trim if supported.
+     */
+    public function trim($fuzziness = 0);
+    
     /**
      * Copies current source image into a new ImageInterface instance
      *

@@ -87,6 +87,23 @@ final class Image extends AbstractImage
     }
 
     /**
+     * Trim the image with optional fuzziness
+     * @param type $fuzziness
+     * @return $this
+     * @throws RuntimeException
+     */
+    public function trim($fuzziness = 0)
+    {
+        try {
+            $this->gmagick->trimimage($fuzziness);
+        } catch (\ImagickException $e) {
+            throw new RuntimeException('Trim operation failed', $e->getCode(), $e);
+        }
+
+        return $this;
+    }
+    
+    /**
      * {@inheritdoc}
      *
      * @return ImageInterface
