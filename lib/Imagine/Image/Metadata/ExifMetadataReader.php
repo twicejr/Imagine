@@ -94,7 +94,12 @@ class ExifMetadataReader extends AbstractMetadataReader
      */
     private function extract($path)
     {
-        if (false === $exifData = @exif_read_data($path, null, true, false)) {
+        $imageType = exif_imagetype($path);
+        if (!in_array($imageType, array(IMAGETYPE_JPEG, IMAGETYPE_TIFF_II, IMAGETYPE_TIFF_MM))) {
+            return array();
+        }
+        
+        if (false === $exifData = exif_read_data($path, null, true, false)) {
             return array();
         }
 
