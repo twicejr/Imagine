@@ -82,7 +82,18 @@ class ExifMetadataReader extends AbstractMetadataReader
             $mime = 'image/jpeg';
         }
 
-        return $this->extract('data://' . $mime . ';base64,' . base64_encode($data));
+        set_error_handler(function() { /* ignore errors */ });
+        try
+        {
+           $output = $this->extract('data://' . $mime . ';base64,' . base64_encode($data));
+        } 
+        catch (Exception $e) 
+        {
+            restore_error_handler();
+            return false;
+        }
+        restore_error_handler();
+        return $output;
     }
 
     /**
